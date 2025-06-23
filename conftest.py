@@ -9,3 +9,7 @@ def app(request):
     sleep(5)
     request.addfinalizer(app.driver.quit)
     return app
+
+#MODIFIYING THE TITLE OF HTML REPORT
+def pytest_html_report_title(report):
+    report.title = "Automation Test Results"
