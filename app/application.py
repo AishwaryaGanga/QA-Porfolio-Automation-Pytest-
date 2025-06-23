@@ -19,7 +19,8 @@ class Application:
 
 
         service = Service(ChromeDriverManager().install())
-        self.driver = webdriver.Chrome(service=service)
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
+        #self.driver = webdriver.Chrome(service=service)
 
         self.page = Page(self.driver)
         self.open_amazon = OpenAmazonPage(self.driver)
