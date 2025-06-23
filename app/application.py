@@ -5,7 +5,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from Pages.basepage import Page
 from Pages.amazon_homepage import OpenAmazonPage
 from Pages.search_page import SearchFor
-import tempfile
 
 
 class Application:
@@ -17,8 +16,6 @@ class Application:
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--window-size=1920,1080")
-        chrome_options.add_argument(f"--user-data-dir=/tmp/unique-profile-{id(self)}")  # avoid conflict
-        chrome_options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
 
 
         service = Service(ChromeDriverManager().install())
