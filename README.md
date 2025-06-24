@@ -1,5 +1,8 @@
 # Amazon Automation Portfolio
 
+![Run Pytest Automation](https://github.com/AishwaryaGanga/QA-Porfolio-Automation-Pytest-/actions/workflows/pytest.yml/badge.svg)
+
+
 ## Overview
 This repository demonstrates my skills in QA automation using Selenium and Pytest. The project automates various functionalities on the Amazon website to ensure quality and reliability.
 
