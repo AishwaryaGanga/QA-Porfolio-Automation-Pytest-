@@ -34,7 +34,7 @@ class SearchFor(Page):
         # element.click()
 
         try:
-            locator = (By.CSS_SELECTOR, 'h2[aria-label*="Dr. Brown\'s Infant-to-Toddler Toothbrush, Soft"]')
+            locator = (By.CSS_SELECTOR, 'h2[aria-label*="Dr.Brown infant toothbrush"]')
             element = self.wait.until(EC.presence_of_element_located(locator))
 
             actions =ActionChains(self.driver)
