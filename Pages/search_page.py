@@ -11,7 +11,7 @@ class SearchFor(Page):
     SEARCH = (By.ID, "twotabsearchtextbox")
     SEARCH_BUTTON = (By.ID, "nav-search-submit-button")
     STAR = (By.CSS_SELECTOR, ".a-star-medium-4")
-    #PRODUCT = (By.CSS_SELECTOR, 'h2[aria-label *= "Dr. Brown\'s Infant Toothbrush"]')
+    PRODUCT = (By.CSS_SELECTOR, 'h2[aria-label *= "Dr. Brown\'s Infant Toothbrush"]')
     CHECK_BOX = (By.CSS_SELECTOR, 'a[aria-label= "Apply Dr. Brown\'s filter to narrow results"]')
     IMAGES = (By.CSS_SELECTOR, ".a-spacing-small.item.imageThumbnail.a-declarative")
 
@@ -34,19 +34,27 @@ class SearchFor(Page):
         # element.click()
 
         try:
-            locator = (By.CSS_SELECTOR, 'h2[aria-label*="Elephant, Blue"]')
-            element = self.wait.until(EC.presence_of_element_located(locator))
+            try:
+                locator = (By.CSS_SELECTOR, 'h2[aria-label*="Elephant, Blue"]')
 
-            actions =ActionChains(self.driver)
-            actions.move_to_element(element).perform()
-            sleep(3)
+                # Wait until the search results container is loaded
+                self.drive.until(EC.presence_of_element_located((By.ID, "search")))
 
-            self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
-            element = self.wait.until(EC.element_to_be_clickable(locator))
-            element.click()
+                # Scroll to make sure product appears
+                self.driver.execute_script("window.scrollBy(0, 1000);")
+                sleep(1)
 
-            element = self.find_element(*locator)
-            self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
+                # Wait until product element is present and clickable
+                element = self.wait.until(EC.presence_of_element_located(locator))
+                self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+
+                actions = ActionChains(self.driver)
+                actions.move_to_element(element).perform()
+                self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
+                sleep(2)
+
+                self.wait.until(EC.element_to_be_clickable(locator)).click()
+
         except Exception as e:
             self.driver.save_screenshot("hover_failure.png")
             raise e
