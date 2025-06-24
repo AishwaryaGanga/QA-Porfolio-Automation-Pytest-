@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from Pages.basepage import Page
 from time import sleep
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 class SearchFor(Page):
@@ -24,12 +26,24 @@ class SearchFor(Page):
 
 
     def hover_to_product(self):
-        element = self.find_element(*self.PRODUCT)
-        actions = ActionChains(self.driver)
-        actions.move_to_element(element).perform()
-        self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
-        sleep(3)
-        element.click()
+        # element = self.find_element(*self.PRODUCT)
+        # actions = ActionChains(self.driver)
+        # actions.move_to_element(element).perform()
+        # self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
+        # sleep(3)
+        # element.click()
+
+        try:
+            locator = (By.CSS_SELECTOR, 'h2[aria-label*="Dr. Brown\'s Infant-to-Toddler Toothbrush, Soft"]')
+            self.wait.until(EC.presence_of_element_located(locator))
+            element = self.find_element(*locator)
+            actions =ActionChains(self.driver)
+            actions.move_to_element(element).perform()
+
+            self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
+        except Exception as e:
+            self.driver.save_screenshot("hover_failure.png")
+            raise e
 
     def check_image(self):
         images = self.find_elements(*self.IMAGES)
