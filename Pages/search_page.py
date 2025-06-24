@@ -41,7 +41,8 @@ class SearchFor(Page):
             actions.move_to_element(element).perform()
             sleep(3)
 
-            self.wait.until(EC.element_to_be_clickable(locator)).click()
+            element = self.wait.until(EC.element_to_be_clickable(locator))
+            element.click()
 
             element = self.find_element(*locator)
             self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
