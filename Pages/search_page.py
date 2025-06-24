@@ -34,26 +34,25 @@ class SearchFor(Page):
         # element.click()
 
         try:
-            try:
-                locator = (By.CSS_SELECTOR, 'h2[aria-label*="Elephant, Blue"]')
+            locator = (By.CSS_SELECTOR, 'h2[aria-label*="Elephant, Blue"]')
 
-                # Wait until the search results container is loaded
-                self.drive.until(EC.presence_of_element_located((By.ID, "search")))
+            # Wait until the search results container is loaded
+            self.drive.until(EC.presence_of_element_located((By.ID, "search")))
 
-                # Scroll to make sure product appears
-                self.driver.execute_script("window.scrollBy(0, 1000);")
-                sleep(1)
+            # Scroll to make sure product appears
+            self.driver.execute_script("window.scrollBy(0, 1000);")
+            sleep(1)
 
-                # Wait until product element is present and clickable
-                element = self.wait.until(EC.presence_of_element_located(locator))
-                self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+            # Wait until product element is present and clickable
+            element = self.wait.until(EC.presence_of_element_located(locator))
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
-                actions = ActionChains(self.driver)
-                actions.move_to_element(element).perform()
-                self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
-                sleep(2)
+            actions = ActionChains(self.driver)
+            actions.move_to_element(element).perform()
+            self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
+            sleep(2)
 
-                self.wait.until(EC.element_to_be_clickable(locator)).click()
+            self.wait.until(EC.element_to_be_clickable(locator)).click()
 
         except Exception as e:
             self.driver.save_screenshot("hover_failure.png")
