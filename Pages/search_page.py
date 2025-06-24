@@ -39,7 +39,11 @@ class SearchFor(Page):
             element = self.find_element(*locator)
             actions =ActionChains(self.driver)
             actions.move_to_element(element).perform()
+            sleep(3)
 
+            self.wait.until(EC.element_to_be_clickable(locator)).click()
+
+            element = self.find_element(*locator)
             self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
         except Exception as e:
             self.driver.save_screenshot("hover_failure.png")
