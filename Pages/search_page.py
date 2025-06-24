@@ -35,12 +35,13 @@ class SearchFor(Page):
 
         try:
             locator = (By.CSS_SELECTOR, 'h2[aria-label*="Dr. Brown\'s Infant-to-Toddler Toothbrush, Soft"]')
-            self.wait.until(EC.presence_of_element_located(locator))
-            element = self.find_element(*locator)
+            element = self.wait.until(EC.presence_of_element_located(locator))
+
             actions =ActionChains(self.driver)
             actions.move_to_element(element).perform()
             sleep(3)
 
+            self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
             element = self.wait.until(EC.element_to_be_clickable(locator))
             element.click()
 
