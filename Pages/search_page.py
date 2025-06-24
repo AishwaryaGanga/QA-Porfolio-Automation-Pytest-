@@ -11,7 +11,7 @@ class SearchFor(Page):
     SEARCH = (By.ID, "twotabsearchtextbox")
     SEARCH_BUTTON = (By.ID, "nav-search-submit-button")
     STAR = (By.CSS_SELECTOR, ".a-star-medium-4")
-    PRODUCT = (By.CSS_SELECTOR, 'h2[aria-label *= "Dr. Brown\'s Infant-to-Toddler Toothbrush, Soft"]')
+    PRODUCT = (By.CSS_SELECTOR, 'h2[aria-label *= "Dr. Brown\'s Infant Toothbrush"]')
     CHECK_BOX = (By.CSS_SELECTOR, 'a[aria-label= "Apply Dr. Brown\'s filter to narrow results"]')
     IMAGES = (By.CSS_SELECTOR, ".a-spacing-small.item.imageThumbnail.a-declarative")
 
