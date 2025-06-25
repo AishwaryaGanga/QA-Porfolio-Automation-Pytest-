@@ -11,7 +11,7 @@ class SearchFor(Page):
     SEARCH = (By.ID, "twotabsearchtextbox")
     SEARCH_BUTTON = (By.ID, "nav-search-submit-button")
     STAR = (By.CSS_SELECTOR, ".a-star-medium-4")
-    PRODUCT = (By.CSS_SELECTOR, 'h2[aria-label *= "Dr. Brown\'s Infant Toothbrush"]')
+    PRODUCT = (By.CSS_SELECTOR, 'h2[aria-label *= "Elephant, Blue"]')
     CHECK_BOX = (By.CSS_SELECTOR, 'a[aria-label= "Apply Dr. Brown\'s filter to narrow results"]')
     IMAGES = (By.CSS_SELECTOR, ".a-spacing-small.item.imageThumbnail.a-declarative")
 
@@ -23,40 +23,18 @@ class SearchFor(Page):
         checkbox = self.find_element(*self.CHECK_BOX)
         actions = ActionChains(self.driver)
         actions.click(checkbox).perform()
+        sleep(3)
 
 
     def hover_to_product(self):
-        # element = self.find_element(*self.PRODUCT)
-        # actions = ActionChains(self.driver)
-        # actions.move_to_element(element).perform()
-        # self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
-        # sleep(3)
-        # element.click()
 
-        try:
-            locator = (By.CSS_SELECTOR, 'h2[aria-label*="Elephant, Blue"]')
-
-            # Wait until the search results container is loaded
-            self.drive.until(EC.presence_of_element_located((By.ID, "search")))
-
-            # Scroll to make sure product appears
-            self.driver.execute_script("window.scrollBy(0, 1000);")
-            sleep(1)
-
-            # Wait until product element is present and clickable
-            element = self.wait.until(EC.presence_of_element_located(locator))
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
-
-            actions = ActionChains(self.driver)
-            actions.move_to_element(element).perform()
-            self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
-            sleep(2)
-
-            self.wait.until(EC.element_to_be_clickable(locator)).click()
-
-        except Exception as e:
-            self.driver.save_screenshot("hover_failure.png")
-            raise e
+        #self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", self.PRODUCT)
+        element = self.wait.until(EC.presence_of_element_located(self.PRODUCT))
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).perform()
+        self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
+        sleep(3)
+        element.click()
 
     def check_image(self):
         images = self.find_elements(*self.IMAGES)
