@@ -7,8 +7,8 @@ def app(request):
     app = Application()
     yield app
     sleep(5)
-    request.addfinalizer(app.driver.quit)
-    return app
+    app.driver.quit()
+
 
 #MODIFIYING THE TITLE OF HTML REPORT
 def pytest_html_report_title(report):
