@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class OpenAmazonPage(Page):
 
     CONTINUE_BTN = (By.CSS_SELECTOR, ".a-button-text")
-    LANGUAGE = (By.CSS_SELECTOR,".icp-nav-link-inner")
+    LANGUAGE = (By.ID, "icp-nav-flyout")
     CHANGE_COUNTRY =(By.CSS_SELECTOR,".icp-mkt-change-lnk")
     TITLE = (By.CSS_SELECTOR, "h3[class='a-spacing-extra-large']")
     CANCEL = (By.ID, "icp-cancel-button")
