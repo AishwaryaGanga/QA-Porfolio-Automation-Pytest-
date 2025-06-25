@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from Pages.basepage import Page
 from time import sleep
+from selenium.webdriver.support import expected_conditions as EC
 
 class OpenAmazonPage(Page):
 
@@ -23,6 +24,8 @@ class OpenAmazonPage(Page):
         sleep(5)
 
     def verify_language(self):
+
+        self.wait.until(EC.presence_of_element_located(self.LANGUAGE))
         hover_to_lang = self.find_element(*self.LANGUAGE)
         actions = ActionChains(self.driver)
         actions.move_to_element(hover_to_lang).perform()
