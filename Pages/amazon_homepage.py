@@ -25,7 +25,7 @@ class OpenAmazonPage(Page):
 
     def verify_language(self):
 
-        self.wait.until(EC.visibility_of_element_located(self.LANGUAGE))
+        self.wait.until(EC.presence_of_element_located(self.LANGUAGE))
         hover_to_lang = self.find_element(*self.LANGUAGE)
         actions = ActionChains(self.driver)
         actions.move_to_element(hover_to_lang).perform()
