@@ -16,6 +16,8 @@ class SearchFor(Page):
     IMAGES = (By.CSS_SELECTOR, ".a-spacing-small.item.imageThumbnail.a-declarative")
 
     def search_for(self):
+
+        self.wait.until(EC.presence_of_element_located(self.SEARCH))
         self.input_text("Toddler Toothbrush" , *self.SEARCH)
         self.click(*self.SEARCH_BUTTON)
         sleep(3)
