@@ -17,7 +17,7 @@ class SearchFor(Page):
 
     def search_for(self):
 
-        self.wait.until(EC.presence_of_element_located(self.SEARCH))
+        self.wait.until(EC.visibility_of_element_located(self.SEARCH))
         self.input_text("Toddler Toothbrush" , *self.SEARCH)
         self.click(*self.SEARCH_BUTTON)
         sleep(3)
@@ -31,7 +31,7 @@ class SearchFor(Page):
     def hover_to_product(self):
 
         #self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", self.PRODUCT)
-        element = self.wait.until(EC.presence_of_element_located(self.PRODUCT))
+        element = self.wait.until(EC.visibility_of_element_located(self.PRODUCT))
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
         self.driver.execute_script("arguments[0].style.border='3px solid red'", element)
